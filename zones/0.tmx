@@ -45,7 +45,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="entities">
-  <object id="1" name="player" x="148.348" y="53.5277">
+  <object id="1" name="player" x="143.76" y="33.646">
    <point/>
   </object>
   <object id="4" name="guard" x="360.93" y="102.467">
