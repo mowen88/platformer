@@ -61,7 +61,7 @@ class Player(pygame.sprite.Sprite):
 
 	def animate(self, dt):
 
-		self.frame_index += 0.15 * dt
+		self.frame_index += 0.2 * dt
 		self.frame_index = self.frame_index % len(self.animations[self.state])	
 		self.angle += (-(self.dir.x * 3) - self.angle)/10
 		self.image = pygame.transform.rotate(self.animations[self.state][int(self.frame_index)], self.angle)
@@ -85,8 +85,6 @@ class Player(pygame.sprite.Sprite):
 		else:
 			ACTIONS['right'], ACTIONS['left'] = False, False
 			self.target_angle = 0
-
-
 
 	def platforms(self, dt):
 		for platform in self.zone.platform_sprites:

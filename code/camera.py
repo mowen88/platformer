@@ -13,6 +13,8 @@ class Camera(pygame.sprite.Group):
 
         # bg images
         self.BG0 = pygame.image.load(f'../assets/bg_images/bg0.png').convert_alpha()
+        self.BG1 = pygame.image.load(f'../assets/bg_images/bg1.png').convert_alpha()
+        self.BG2 = pygame.image.load(f'../assets/bg_images/bg2.png').convert_alpha()
 
     def screenshake(self):
         if self.game.screenshaking:
@@ -28,7 +30,9 @@ class Camera(pygame.sprite.Group):
 
     def backgrounds(self, screen):
         screen.fill(RED_ORANGE)
-        screen.blit(self.BG0, (0 - self.offset[0] * 0.1, 0 - self.offset[1] * 0.1))
+        screen.blit(self.BG1, (0 - self.offset[0] * 0.01, 0 - self.offset[1] * 0.01))
+        screen.blit(self.BG2, (0 - self.offset[0] * 0.02, 0 - self.offset[1] * 0.005))
+        screen.blit(self.BG0, (0 - self.offset[0] * 0.1, 0 - self.offset[1] * 0.03))
 
     def offset_draw(self, target):
 
