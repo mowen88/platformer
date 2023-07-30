@@ -71,20 +71,22 @@ class Player(pygame.sprite.Sprite):
 		keys = pygame.key.get_pressed()
 
 		if ACTIONS['up']:
+			ACTIONS['up'] = False
 			self.jump(self.jump_height)
 			if not self.on_ground:
 				self.jump_buffer_active = True
 
-		if keys[pygame.K_RIGHT]:
+		if ACTIONS['right']:
 			self.acc.x += 0.5
 			self.target_angle = -10
-		elif keys[pygame.K_LEFT]:
+		elif ACTIONS['left']:
 			self.acc.x -= 0.5
 			self.target_angle = 10
 		else:
+			ACTIONS['right'], ACTIONS['left'] = False, False
 			self.target_angle = 0
 
-		self.game.reset_keys()
+
 
 	def platforms(self, dt):
 		for platform in self.zone.platform_sprites:
@@ -213,8 +215,9 @@ class Player(pygame.sprite.Sprite):
 		self.acc.x = 0
 		self.animate(dt)
 		self.input()
-		self.platforms(dt)
 		self.physics_x(dt)
+		# platforms must go after x and before y so blocks take priority
+		self.platforms(dt)
 		self.physics_y(dt)
 		self.handle_jumping(dt)
 

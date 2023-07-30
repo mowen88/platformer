@@ -5,7 +5,7 @@ from pytmx.util_pygame import load_pygame
 from camera import Camera
 from state import State
 from dialogue import Dialogue
-from sprites import Tile, Platform, MovingPlatform
+from sprites import Tile, Platform, CircularPlatform, MovingPlatform
 from player import Player
 
 class Zone(State):
@@ -27,9 +27,14 @@ class Zone(State):
 	def create_map(self):
 		tmx_data = load_pygame(f'../zones/{self.game.current_zone}.tmx')
 
-		Platform(self.game, self, [self.platform_sprites, self.updated_sprites, self.rendered_sprites], pos=(6 * TILESIZE, 15 * TILESIZE), surf=pygame.Surface((TILESIZE * 5, TILESIZE)), direction=(1,0))
-		MovingPlatform(self.game, self, [self.platform_sprites, self.updated_sprites, self.rendered_sprites], pos=(3 * TILESIZE, 22 * TILESIZE), surf=pygame.Surface((TILESIZE * 3, TILESIZE)), direction=(0,1), move_range=TILESIZE * 6)
-
+		for obj in tmx_data.get_layer_by_name('platforms'):
+			if obj.name == 'horizontal': MovingPlatform(self.game, self, [self.platform_sprites, self.updated_sprites, self.rendered_sprites], pos=(obj.x, obj.y), surf=obj.image, direction=(2,0))
+			if obj.name == 'vertical': MovingPlatform(self.game, self, [self.platform_sprites, self.updated_sprites, self.rendered_sprites], pos=(obj.x, obj.y), surf=obj.image, direction=(0,3))
+			if obj.name == 'vertical_2': MovingPlatform(self.game, self, [self.platform_sprites, self.updated_sprites, self.rendered_sprites], pos=(obj.x, obj.y), surf=obj.image, direction=(0,2))
+			if obj.name == 'vertical_3': MovingPlatform(self.game, self, [self.platform_sprites, self.updated_sprites, self.rendered_sprites], pos=(obj.x, obj.y), surf=obj.image, direction=(0,2))
+			if obj.name == 'vertical_4': MovingPlatform(self.game, self, [self.platform_sprites, self.updated_sprites, self.rendered_sprites], pos=(obj.x, obj.y), surf=obj.image, direction=(0,2))
+		
+		
 		# # add backgrounds
 		# Object(self.game, self, [self.rendered_sprites, Z_LAYERS[1]], (0,0), pygame.image.load('../assets/bg.png').convert_alpha())
 		# Object(self.game, self, [self.rendered_sprites, Z_LAYERS[2]], (0,TILESIZE), pygame.image.load('../zones/0.png').convert_alpha())
@@ -51,6 +56,7 @@ class Zone(State):
 		if ACTIONS['return']: 
 			self.dialogue.enter_state()
 			self.game.reset_keys()
+
 		self.updated_sprites.update(dt)
 		self.rendered_sprites.screenshake_update(dt)
 

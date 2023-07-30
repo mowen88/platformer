@@ -18,4 +18,4 @@ class Dialogue(State):
 
 	def render(self, screen):
 		self.prev_state.render(screen)
-		pygame.draw.rect(screen, BLUE, (self.sprite.rect.left - 100 - self.offset.x, self.sprite.rect.top - 100 - self.offset.y, 100, 50))
+		pygame.draw.rect(screen, PINK, (self.sprite.rect.left - 75 - self.offset.x, self.sprite.rect.top - 75 - self.offset.y, 100, 50))

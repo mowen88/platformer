@@ -11,6 +11,9 @@ class Camera(pygame.sprite.Group):
         self.acc = pygame.math.Vector2()
         self.screenshake_timer = 0
 
+        # bg images
+        self.BG0 = pygame.image.load(f'../assets/bg_images/bg0.png').convert_alpha()
+
     def screenshake(self):
         if self.game.screenshaking:
             self.screenshake_timer += 1
@@ -23,8 +26,13 @@ class Camera(pygame.sprite.Group):
     def screenshake_update(self, dt):
         self.screenshake_timer *= dt
 
+    def backgrounds(self, screen):
+        screen.fill(RED_ORANGE)
+        screen.blit(self.BG0, (0 - self.offset[0] * 0.1, 0 - self.offset[1] * 0.1))
+
     def offset_draw(self, target):
-        self.game.screen.fill(LIGHT_GREEN)
+
+        self.backgrounds(self.game.screen)
 
         mouse_dist = self.zone.get_distance(pygame.mouse.get_pos(), target.rect.center) / 10
 

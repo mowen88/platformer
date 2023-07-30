@@ -2,7 +2,7 @@ import pygame
 
 FPS = 60
 TILESIZE = 20
-RES = WIDTH, HEIGHT = pygame.math.Vector2(960, 540)#(640, 360)#(960, 540)
+RES = WIDTH, HEIGHT = pygame.math.Vector2(400, 225)#(640, 360)#(960, 540)
 HALF_WIDTH, HALF_HEIGHT = RES/2
 
 FONT = '../fonts/Pokemon Classic.ttf'
@@ -35,6 +35,7 @@ BLUE = ((20, 68, 145))
 LIGHT_BLUE = ((113, 181, 219))
 RED = ((112, 21, 31))
 ORANGE = ((227, 133, 36))
+RED_ORANGE = ((255, 130, 99)) 
 PINK = ((195, 67, 92))
 GREEN = ((88, 179, 150))
 LIGHT_GREEN = ((106, 226, 145))
